@@ -6,6 +6,8 @@ import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import { ClockIcon, TagIcon, FunnelIcon } from '@heroicons/react/24/outline'
 
+export const dynamic = 'force-dynamic'
+
 const categories = [
     { id: 'visi', name: 'Visi raksti', slug: '' },
     { id: 'gaidibas', name: 'Gaidības', slug: 'gaidibas' },
@@ -118,8 +120,8 @@ export default function LasiPage() {
                                 key={category.id}
                                 onClick={() => setActiveCategory(category.id)}
                                 className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${activeCategory === category.id
-                                        ? 'bg-primary-500 text-white shadow-lg scale-105'
-                                        : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600 shadow-md'
+                                    ? 'bg-primary-500 text-white shadow-lg scale-105'
+                                    : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600 shadow-md'
                                     }`}
                             >
                                 {category.name}
