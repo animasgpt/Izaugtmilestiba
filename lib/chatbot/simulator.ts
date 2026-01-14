@@ -122,4 +122,3 @@ Lai gan man nav konkrētas informācijas par šo tēmu manā datubāzē, es iesa
 
 Atceries - tu dari lieliski, ka meklē atbildes un vēlies būt labāks vecāks! ❤️`
 }
-}
