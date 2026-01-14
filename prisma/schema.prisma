@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Lietotāji (Admin)
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // Hashed password
+  email     String?  @unique
+  role      String   @default("admin") // admin, editor
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Raksti
+model Article {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  excerpt      String?
+  content      String   @db.Text
+  category     String   // gaidibas, dzives-gads, 2-3-gadi, bernudarzs, sarunas, raksti
+  categoryName String
+  readTime     String?
+  author       String   @default("Laura Bērziņa")
+  date         DateTime @default(now())
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+  @@index([published])
+}
+
+// Produkti
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String   @db.Text
+  price       Float
+  image       String?
+  category    String   // book, consultation, program
+  inStock     Boolean  @default(true)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItem[]
+
+  @@index([category])
+  @@index([featured])
+}
+
+// Pasūtījumi
+model Order {
+  id              String   @id @default(cuid())
+  orderNumber     String   @unique
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  subtotal        Float
+  shipping        Float
+  total           Float
+  status          String   @default("pending") // pending, processing, shipped, delivered, cancelled
+  paymentMethod   String   // stripe, bank_transfer
+  paymentStatus   String   @default("pending") // pending, paid, failed
+  shippingStreet  String
+  shippingCity    String
+  shippingPostal  String
+  shippingCountry String   @default("Latvija")
+  dpdLocation     String?
+  notes           String?  @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  items OrderItem[]
+
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([createdAt])
+}
+
+// Pasūtījuma pozīcijas
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  productId   String
+  productName String
+  quantity    Int
+  price       Float
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+// AI Chatbot Sarunas (ja vēlies saglabāt)
+model ChatConversation {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  messages  Json     // Array of messages
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sessionId])
+}
