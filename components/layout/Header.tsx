@@ -76,7 +76,7 @@ export default function Header() {
                         <img
                             src="/images/IM-sirds pirms.png"
                             alt="Izaugt Mīlestībā"
-                            className="h-16 w-auto transform group-hover:scale-105 transition-transform"
+                            className="h-12 w-auto transform group-hover:scale-105 transition-transform"
                         />
                     </Link>
 
@@ -91,10 +91,11 @@ export default function Header() {
                             >
                                 <Link
                                     href={item.href}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === item.href
-                                        ? 'text-primary-600 bg-primary-50'
-                                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                                    className={`px-4 py-2 rounded-lg text-base font-semibold transition-all ${pathname === item.href
+                                        ? 'text-secondary-700 bg-secondary-50'
+                                        : 'text-secondary-600 hover:text-secondary-700 hover:bg-gray-50'
                                         }`}
+                                    style={{ fontFamily: 'Oswald, sans-serif' }}
                                 >
                                     {item.name}
                                 </Link>
@@ -160,7 +161,8 @@ export default function Header() {
                             <div key={item.name} className="py-2">
                                 <Link
                                     href={item.href}
-                                    className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg"
+                                    className="block px-4 py-2 text-lg font-semibold text-secondary-600 hover:text-secondary-700 hover:bg-gray-50 rounded-lg"
+                                    style={{ fontFamily: 'Oswald, sans-serif' }}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     {item.name}

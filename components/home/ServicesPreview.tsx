@@ -35,7 +35,7 @@ const services = [
 
 export default function ServicesPreview() {
     return (
-        <section className="py-16 md:py-24 bg-light">
+        <section className="pt-8 pb-16 md:pt-12 md:pb-24 bg-light">
             <div className="container-custom">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-primary-500">

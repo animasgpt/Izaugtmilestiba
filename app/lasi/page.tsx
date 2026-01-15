@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import { ClockIcon, TagIcon, FunnelIcon } from '@heroicons/react/24/outline'
+import { ClockIcon, TagIcon, FunnelIcon, SpeakerWaveIcon, StopIcon } from '@heroicons/react/24/outline'
 
 export const dynamic = 'force-dynamic'
 
@@ -81,15 +81,49 @@ const demoArticles = [
     },
 ]
 
-export default function LasiPage() {
+function LasiPageContent() {
     const searchParams = useSearchParams()
     const initialCategory = searchParams?.get('kategorija') || 'visi'
     const [activeCategory, setActiveCategory] = useState(initialCategory)
     const [showFilters, setShowFilters] = useState(false)
+    const [speakingId, setSpeakingId] = useState<number | null>(null)
 
     const filteredArticles = activeCategory === 'visi'
         ? demoArticles
         : demoArticles.filter(article => article.category === activeCategory)
+
+    const handleSpeak = (e: React.MouseEvent, article: typeof demoArticles[0]) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        // Stop if already speaking this article
+        if (speakingId === article.id) {
+            window.speechSynthesis.cancel()
+            setSpeakingId(null)
+            return
+        }
+
+        // Stop any current speech
+        window.speechSynthesis.cancel()
+
+        // Create speech synthesis
+        const text = `${article.title}. ${article.excerpt}`
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.lang = 'lv-LV'
+        utterance.rate = 0.9
+        utterance.pitch = 1
+
+        utterance.onend = () => {
+            setSpeakingId(null)
+        }
+
+        utterance.onerror = () => {
+            setSpeakingId(null)
+        }
+
+        setSpeakingId(article.id)
+        window.speechSynthesis.speak(utterance)
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50">
@@ -159,9 +193,25 @@ export default function LasiPage() {
                                 </p>
 
                                 <div className="flex items-center justify-between text-sm text-gray-500 mt-auto pt-4 border-t border-gray-100">
-                                    <div className="flex items-center space-x-1">
-                                        <ClockIcon className="h-4 w-4" />
-                                        <span>{article.readTime}</span>
+                                    <div className="flex items-center space-x-3">
+                                        <div className="flex items-center space-x-1">
+                                            <ClockIcon className="h-4 w-4" />
+                                            <span>{article.readTime}</span>
+                                        </div>
+                                        <button
+                                            onClick={(e) => handleSpeak(e, article)}
+                                            className={`p-2 rounded-full transition-all ${speakingId === article.id
+                                                ? 'bg-primary-500 text-white'
+                                                : 'hover:bg-gray-100 text-gray-600'
+                                                }`}
+                                            title={speakingId === article.id ? 'Apturēt' : 'Klausīties'}
+                                        >
+                                            {speakingId === article.id ? (
+                                                <StopIcon className="h-5 w-5" />
+                                            ) : (
+                                                <SpeakerWaveIcon className="h-5 w-5" />
+                                            )}
+                                        </button>
                                     </div>
                                     <span>{new Date(article.date).toLocaleDateString('lv-LV')}</span>
                                 </div>
@@ -177,5 +227,24 @@ export default function LasiPage() {
                 )}
             </div>
         </div>
+    )
+}
+
+export default function LasiPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50">
+                <div className="container-custom py-16">
+                    <div className="text-center">
+                        <div className="animate-pulse">
+                            <div className="h-12 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+                            <div className="h-6 bg-gray-200 rounded w-96 mx-auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }>
+            <LasiPageContent />
+        </Suspense>
     )
 }

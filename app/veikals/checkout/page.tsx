@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCart } from '@/lib/cart/cartContext'
 import { useRouter } from 'next/navigation'
 import Button from '@/components/ui/Button'
@@ -24,6 +24,12 @@ export default function CheckoutPage() {
         dpdLocation: '',
     })
 
+    useEffect(() => {
+        if (items.length === 0) {
+            router.push('/veikals/grozs')
+        }
+    }, [items.length, router])
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -35,7 +41,6 @@ export default function CheckoutPage() {
     }
 
     if (items.length === 0) {
-        router.push('/veikals/grozs')
         return null
     }
 
@@ -125,8 +130,8 @@ export default function CheckoutPage() {
                                             <label
                                                 key={location.id}
                                                 className={`block p-4 border-2 rounded-lg cursor-pointer transition-colors ${formData.dpdLocation === location.id
-                                                        ? 'border-primary-500 bg-primary-50'
-                                                        : 'border-gray-200 hover:border-primary-300'
+                                                    ? 'border-primary-500 bg-primary-50'
+                                                    : 'border-gray-200 hover:border-primary-300'
                                                     }`}
                                             >
                                                 <input

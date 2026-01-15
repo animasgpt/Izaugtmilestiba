@@ -5,8 +5,13 @@ import { validateSession } from '@/lib/auth/auth'
 export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl
 
-    // Check if accessing admin routes (except login page)
-    if (pathname.startsWith('/labot') && pathname !== '/labot') {
+    // Allow access to login page
+    if (pathname === '/labot') {
+        return NextResponse.next()
+    }
+
+    // Check if accessing protected admin routes
+    if (pathname.startsWith('/labot/')) {
         const token = request.cookies.get('auth-token')?.value
 
         if (!token) {

@@ -6,7 +6,7 @@ import { SparklesIcon } from '@heroicons/react/24/outline'
 
 export default function HeroSection() {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-r from-cream-500 to-light py-16 md:py-24">
+        <section className="relative overflow-hidden bg-gradient-to-r from-cream-500 to-light py-4 md:py-6">
             <div className="container-custom">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
