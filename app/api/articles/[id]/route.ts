@@ -6,7 +6,7 @@ export async function GET(
     { params }: { params: { id: string } }
 ) {
     try {
-        const article = getArticleById(params.id)
+        const article = await getArticleById(params.id)
 
         if (!article) {
             return NextResponse.json({ error: 'Article not found' }, { status: 404 })
@@ -24,7 +24,7 @@ export async function PUT(
 ) {
     try {
         const data = await request.json()
-        const article = updateArticle(params.id, data)
+        const article = await updateArticle(params.id, data)
 
         if (!article) {
             return NextResponse.json({ error: 'Article not found' }, { status: 404 })
@@ -41,7 +41,7 @@ export async function DELETE(
     { params }: { params: { id: string } }
 ) {
     try {
-        const success = deleteArticle(params.id)
+        const success = await deleteArticle(params.id)
 
         if (!success) {
             return NextResponse.json({ error: 'Article not found' }, { status: 404 })

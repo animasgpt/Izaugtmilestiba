@@ -47,7 +47,7 @@ const products = [
     {
         id: 3,
         title: '30 Dienu Izaicinājums',
-        description: '30 dienu izaicinājums vecākiem. Praktiski uzdevumi un atbalsts katru dienu.',
+        description: '30 dienu izaicinājums vecākiem. Praktiski uzdevumi un atbalsts katru dienu.  Izmēģini jau tagad!',
         longDescription: 'Transformē savas vecāku prasmes 30 dienās ar ikdienas uzdevumiem un atbalstu.',
         icon: AcademicCapIcon,
         image: '/images/demo/challenge.png',

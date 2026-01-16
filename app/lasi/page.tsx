@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
@@ -87,10 +87,27 @@ function LasiPageContent() {
     const [activeCategory, setActiveCategory] = useState(initialCategory)
     const [showFilters, setShowFilters] = useState(false)
     const [speakingId, setSpeakingId] = useState<number | null>(null)
+    const [articles, setArticles] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            try {
+                const response = await fetch('/api/articles')
+                const data = await response.json()
+                setArticles(data.articles || [])
+            } catch (error) {
+                console.error('Failed to fetch articles:', error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchArticles()
+    }, [])
 
     const filteredArticles = activeCategory === 'visi'
-        ? demoArticles
-        : demoArticles.filter(article => article.category === activeCategory)
+        ? articles
+        : articles.filter(article => article.category === activeCategory)
 
     const handleSpeak = (e: React.MouseEvent, article: typeof demoArticles[0]) => {
         e.preventDefault()

@@ -3,75 +3,23 @@ import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import { ClockIcon, TagIcon, CalendarIcon, ShareIcon } from '@heroicons/react/24/outline'
+import { getArticleById } from '@/lib/db/articles'
 
-// This would come from a database
-const articles: Record<string, any> = {
-    '1': {
-        id: 1,
-        title: 'Kā palīdzēt bērnam tikt galā ar emocijām',
-        content: `Emociju regulācija ir viena no svarīgākajām prasmēm, ko bērns apgūst dzīves laikā. Tas ir process, kas sākas jau agrā bērnībā un turpinās visu dzīvi.
-
-## Kāpēc emociju regulācija ir svarīga?
-
-Bērni, kas prot regulēt savas emocijas:
-- Labāk tiek galā ar stresu
-- Veiksmīgāk veido attiecības
-- Labāk mācās skolā
-- Ir laimīgāki un apmierinātāki
-
-## Kā vecāki var palīdzēt?
-
-### 1. Nosauciet emocijas
-Kad bērns piedzīvo spēcīgas emocijas, palīdziet viņam tās nosaukt: "Es redzu, ka tu esi dusmīgs" vai "Šķiet, ka tu jūties bēdīgs". Tas palīdz bērnam apzināties un saprast savas jūtas.
-
-### 2. Atzīstiet bērna jūtas
-Nekad neatspēkojiet bērna emocijas ar frāzēm kā "Nav par ko raudāt" vai "Tas nav tik slikti". Tā vietā sakiet: "Tas ir saprotami, ka tu jūties tā" vai "Es redzu, ka tas tev ir grūti".
-
-### 3. Palīdziet atrast risinājumu
-Kad bērns ir nomierinājies, kopā meklējiet veidus, kā tikt galā ar situāciju: "Ko mēs varētu darīt, lai justos labāk?" vai "Kā mēs varētu atrisināt šo problēmu?"
-
-### 4. Būt pacietīgam
-Emociju regulācija ir prasme, kas attīstās pakāpeniski. Bērnam vajag laiku un daudz prakses, lai to apgūtu.
-
-## Praktiskas stratēģijas
-
-**Dziļa elpošana:** Māciet bērnam dziļi ieelpot un izelpot, kad viņš jūtas pārņemts.
-
-**Laika pauze:** Izveidojiet "mierīgo stūrīti", kur bērns var doties, lai nomierinātos.
-
-**Fiziskās aktivitātes:** Skriešana, lēkāšana vai citas kustības palīdz izlaist uzkrāto enerģiju.
-
-**Māksla un radošums:** Zīmēšana, modelēšana vai citas radošas aktivitātes var palīdzēt izteikt emocijas.
-
-## Atceries
-
-Visas emocijas ir pieļaujamas un normālas. Tas, kas nav pieļaujams, ir destruktīva uzvedība. Māciet bērnam, ka viņš drīkst būt dusmīgs, bet nedrīkst sist vai lauzt lietas.
-
-Jūsu mierīgā un atbalstoša klātbūtne ir labākais veids, kā palīdzēt bērnam iemācīties tikt galā ar emocijām.`,
-        category: 'sarunas',
-        categoryName: 'Sarunas',
-        readTime: '5 min',
-        date: '2026-01-10',
-        author: 'Laura Bērziņa',
-        image: '/images/demo/hero.png',
-    },
-}
-
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-    const article = articles[params.slug]
+export default async function ArticlePage({ params }: { params: { slug: string } }) {
+    const article = await getArticleById(params.slug)
 
     if (!article) {
         notFound()
     }
 
     const relatedArticles = [
-        { id: 2, title: 'Pozitīva komunikācija ar bērnu', category: 'Sarunas' },
-        { id: 4, title: 'Rotaļas nozīme 2-3 gadus vecam bērnam', category: '2.-3. gadi' },
+        { id: '2', title: 'Pozitīva komunikācija ar bērnu', category: 'Sarunas' },
+        { id: '4', title: 'Rotaļas nozīme 2-3 gadus vecam bērnam', category: '2.-3. gadi' },
     ]
 
     const recommendedProducts = [
-        { id: 1, name: 'Grāmata "Izaugt Mīlestībā"', price: '24.99€' },
-        { id: 2, name: 'Konsultācija', price: 'No 45€' },
+        { id: '1', name: 'Grāmata "Izaugt Mīlestībā"', price: '24.99€' },
+        { id: '2', name: 'Konsultācija', price: 'No 45€' },
     ]
 
     return (
@@ -120,8 +68,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                                     return <h2 key={index} className="text-3xl font-display font-bold mt-8 mb-4">{paragraph.replace('##', '').trim()}</h2>
                                 } else if (paragraph.startsWith('###')) {
                                     return <h3 key={index} className="text-2xl font-display font-semibold mt-6 mb-3">{paragraph.replace('###', '').trim()}</h3>
-                                } else if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-                                    return <p key={index} className="font-semibold text-lg mt-4">{paragraph.replace(/\*\*/g, '')}</p>
+                                } else if (paragraph.startsWith('**') && (paragraph.endsWith('**') || paragraph.includes('**'))) {
+                                    // Basic bold handling
+                                    return <p key={index} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                                 } else if (paragraph.startsWith('-')) {
                                     const items = paragraph.split('\n').filter(item => item.startsWith('-'))
                                     return (
@@ -190,7 +139,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                             <p className="text-sm opacity-90 mb-4">
                                 Rezervē konsultāciju un saņem individuālu padomu savai situācijai.
                             </p>
-                            <Button href="/pakalpojumi/konsultacijas" variant="outline" className="w-full bg-white text-primary-600 hover:bg-gray-50">
+                            <Button href="/pakalpojumi/consultations" variant="outline" className="w-full bg-white text-primary-600 hover:bg-gray-50">
                                 Rezervēt konsultāciju
                             </Button>
                         </Card>

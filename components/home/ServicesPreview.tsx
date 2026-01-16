@@ -26,7 +26,7 @@ const services = [
     {
         id: 3,
         title: 'Izaicinājumu programma',
-        description: '30 dienu izaicinājums vecākiem. Praktiski uzdevumi un atbalsts katru dienu.',
+        description: '30 dienu izaicinājums vecākiem. Praktiski uzdevumi un atbalsts katru dienu. Izmēģini jau tagad!',
         icon: AcademicCapIcon,
         image: '/images/demo/challenge.png',
         price: '39€',

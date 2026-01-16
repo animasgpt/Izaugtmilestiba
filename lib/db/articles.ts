@@ -1,57 +1,99 @@
-// Demo articles database (in production, this would be a real database)
-let articles = [
-    {
-        id: '1',
-        title: 'Kā palīdzēt bērnam tikt galā ar emocijām',
-        excerpt: 'Emociju regulācija ir svarīga prasme, ko bērni apgūst pakāpeniski.',
-        content: 'Pilns raksta saturs...',
-        category: 'sarunas',
-        categoryName: 'Sarunas',
-        readTime: '5 min',
-        date: '2026-01-10',
-        author: 'Laura Bērziņa',
-        published: true,
-    },
-    // ... more articles
-]
+import { prisma } from '../prisma'
 
-export function getAllArticles() {
-    return articles
+export interface Article {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    content: string;
+    category: string;
+    categoryName: string;
+    readTime: string | null;
+    author: string;
+    date: Date | string;
+    published: boolean;
 }
 
-export function getArticleById(id: string) {
-    return articles.find(a => a.id === id)
+export async function getAllArticles() {
+    return await prisma.article.findMany({
+        orderBy: {
+            date: 'desc'
+        }
+    })
 }
 
-export function createArticle(data: any) {
-    const newArticle = {
-        id: Date.now().toString(),
-        ...data,
-        date: new Date().toISOString().split('T')[0],
-        published: data.published ?? false,
+export async function getArticleById(id: string) {
+    // Try to find by ID first
+    let article = await prisma.article.findUnique({
+        where: { id }
+    })
+
+    // If not found, try to find by slug
+    if (!article) {
+        article = await prisma.article.findUnique({
+            where: { slug: id }
+        })
     }
 
-    articles.push(newArticle)
-    return newArticle
+    return article
 }
 
-export function updateArticle(id: string, data: any) {
-    const index = articles.findIndex(a => a.id === id)
-    if (index === -1) return null
+export async function createArticle(data: any) {
+    const slug = data.title
+        .toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/[^\w-]+/g, '')
 
-    articles[index] = { ...articles[index], ...data }
-    return articles[index]
+    return await prisma.article.create({
+        data: {
+            title: data.title,
+            slug: data.slug || slug || `article-${Date.now()}`,
+            excerpt: data.excerpt,
+            content: data.content,
+            category: data.category,
+            categoryName: data.categoryName,
+            readTime: data.readTime,
+            author: data.author || 'Laura Bērziņa',
+            date: data.date ? new Date(data.date) : new Date(),
+            published: data.published ?? false,
+        }
+    })
 }
 
-export function deleteArticle(id: string) {
-    const index = articles.findIndex(a => a.id === id)
-    if (index === -1) return false
-
-    articles.splice(index, 1)
-    return true
+export async function updateArticle(id: string, data: any) {
+    return await prisma.article.update({
+        where: { id },
+        data: {
+            title: data.title,
+            slug: data.slug,
+            excerpt: data.excerpt,
+            content: data.content,
+            category: data.category,
+            categoryName: data.categoryName,
+            readTime: data.readTime,
+            author: data.author,
+            date: data.date ? new Date(data.date) : undefined,
+            published: data.published,
+        }
+    })
 }
 
-export function bulkCreateArticles(articlesData: any[]) {
-    const created = articlesData.map(data => createArticle(data))
-    return created
+export async function deleteArticle(id: string) {
+    try {
+        await prisma.article.delete({
+            where: { id }
+        })
+        return true
+    } catch (error) {
+        return false
+    }
+}
+
+export async function bulkCreateArticles(articlesData: any[]) {
+    const results = []
+    for (const data of articlesData) {
+        const result = await createArticle(data)
+        results.push(result)
+    }
+    return results
 }

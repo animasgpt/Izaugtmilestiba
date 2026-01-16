@@ -6,7 +6,7 @@ export async function GET(
     { params }: { params: { id: string } }
 ) {
     try {
-        const product = getProductById(params.id);
+        const product = await getProductById(params.id);
 
         if (!product) {
             return NextResponse.json(
@@ -30,7 +30,7 @@ export async function PUT(
 ) {
     try {
         const body = await request.json();
-        const updated = updateProduct(params.id, body);
+        const updated = await updateProduct(params.id, body);
 
         if (!updated) {
             return NextResponse.json(
@@ -53,7 +53,7 @@ export async function DELETE(
     { params }: { params: { id: string } }
 ) {
     try {
-        const success = deleteProduct(params.id);
+        const success = await deleteProduct(params.id);
 
         if (!success) {
             return NextResponse.json(

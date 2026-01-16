@@ -3,7 +3,7 @@ import { getAllProducts, createProduct, type Product } from '@/lib/db/products';
 
 export async function GET() {
     try {
-        const products = getAllProducts();
+        const products = await getAllProducts();
         return NextResponse.json(products);
     } catch (error) {
         return NextResponse.json(
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const newProduct = createProduct(body);
+        const newProduct = await createProduct(body);
         return NextResponse.json(newProduct, { status: 201 });
     } catch (error) {
         return NextResponse.json(

@@ -1,79 +1,66 @@
-// Demo produktu datu bāze
-// Reālā aplikācijā šie dati būtu datubāzē
+import { prisma } from '../prisma'
 
 export interface Product {
     id: string;
     name: string;
     description: string;
     price: number;
-    image: string;
-    category: 'book' | 'consultation' | 'program';
+    image: string | null;
+    category: string;
     inStock: boolean;
     featured: boolean;
 }
 
-let products: Product[] = [
-    {
-        id: '1',
-        name: 'Grāmata "Izaugt Mīlestībā"',
-        description: 'Praktisks ceļvedis vecākiem par mīlestības pilnu audzināšanu',
-        price: 24.99,
-        image: '/images/book.jpg',
-        category: 'book',
-        inStock: true,
-        featured: true,
-    },
-    {
-        id: '2',
-        name: 'Individuāla konsultācija (60 min)',
-        description: 'Personiska tikšanās ar vecāku konsultanti',
-        price: 45.00,
-        image: '/images/consultation.jpg',
-        category: 'consultation',
-        inStock: true,
-        featured: true,
-    },
-    {
-        id: '3',
-        name: '30 dienu izaicinājums',
-        description: 'Strukturēta programma vecākiem ar ikdienas uzdevumiem',
-        price: 39.99,
-        image: '/images/challenge.jpg',
-        category: 'program',
-        inStock: true,
-        featured: false,
-    },
-];
-
-export function getAllProducts(): Product[] {
-    return products;
+export async function getAllProducts() {
+    return await prisma.product.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
 }
 
-export function getProductById(id: string): Product | undefined {
-    return products.find(p => p.id === id);
+export async function getProductById(id: string) {
+    return await prisma.product.findUnique({
+        where: { id }
+    })
 }
 
-export function createProduct(product: Omit<Product, 'id'>): Product {
-    const newProduct: Product = {
-        ...product,
-        id: Date.now().toString(),
-    };
-    products.push(newProduct);
-    return newProduct;
+export async function createProduct(data: any) {
+    return await prisma.product.create({
+        data: {
+            name: data.name,
+            description: data.description,
+            price: parseFloat(data.price),
+            image: data.image,
+            category: data.category,
+            inStock: data.inStock ?? true,
+            featured: data.featured ?? false,
+        }
+    })
 }
 
-export function updateProduct(id: string, updates: Partial<Product>): Product | null {
-    const index = products.findIndex(p => p.id === id);
-    if (index === -1) return null;
-
-    products[index] = { ...products[index], ...updates };
-    return products[index];
+export async function updateProduct(id: string, data: any) {
+    return await prisma.product.update({
+        where: { id },
+        data: {
+            name: data.name,
+            description: data.description,
+            price: data.price ? parseFloat(data.price) : undefined,
+            image: data.image,
+            category: data.category,
+            inStock: data.inStock,
+            featured: data.featured,
+        }
+    })
 }
 
-export function deleteProduct(id: string): boolean {
-    const index = products.findIndex(p => p.id === id);
-    if (index === -1) return false;
-
-    products.splice(index, 1);
-    return true;
+export async function deleteProduct(id: string) {
+    try {
+        await prisma.product.delete({
+            where: { id }
+        })
+        return true
+    } catch (error) {
+        return false
+    }
 }
