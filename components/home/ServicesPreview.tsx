@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
+import SiteText from '@/components/SiteText'
 import { ChatBubbleLeftRightIcon, BookOpenIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
 
 const services = [
@@ -39,11 +40,14 @@ export default function ServicesPreview() {
             <div className="container-custom">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-primary-500">
-                        Mūsu <span className="text-accent-500">Pakalpojumi</span>
+                        Mūsu <SiteText textKey="services.title" fallback="Pakalpojumi" as="span" className="text-accent-500" />
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                        Izvēlies sev piemērotāko atbalsta veidu
-                    </p>
+                    <SiteText
+                        textKey="services.subtitle"
+                        fallback="Izvēlies sev piemērotāko atbalsta veidu"
+                        as="p"
+                        className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+                    />
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
+import SiteText from '@/components/SiteText'
 import { SparklesIcon } from '@heroicons/react/24/outline'
 
 export default function HeroSection() {
@@ -16,14 +17,19 @@ export default function HeroSection() {
                             <span>Tavs atbalsts vecāku ceļā</span>
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-primary-500">
-                            Atbalsts vecākiem ceļā uz{' '}
-                            <span className="text-accent-500 block mt-2">mīlošu un saprotošu ģimeni.</span>
-                        </h1>
+                        <SiteText
+                            textKey="home.hero.title"
+                            fallback="Izaugt Mīlestībā"
+                            as="h1"
+                            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-primary-500"
+                        />
 
-                        <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl">
-                            Konsultācijas, raksti, podkāsti un AI asistents - viss vienuviet, lai palīdzētu Jums augt kopā ar bērnu.
-                        </p>
+                        <SiteText
+                            textKey="home.hero.subtitle"
+                            fallback="Atbalsts vecākiem ceļā uz mīlošu un saprotošu ģimeni!"
+                            as="p"
+                            className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl"
+                        />
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             <Button href="/runa" variant="primary" size="lg">

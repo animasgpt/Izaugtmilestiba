@@ -47,11 +47,11 @@ export default function KonsultacijasPage() {
     return (
         <div className="min-h-screen">
             {/* Hero */}
-            <section className="bg-gradient-to-br from-primary-500 to-secondary-500 text-white section-padding">
+            <section className="bg-gradient-to-br from-primary-500 to-secondary-500 text-white py-20">
                 <div className="container-custom">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
+                            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
                                 Konsultācijas Vecākiem
                             </h1>
                             <p className="text-xl opacity-90 mb-8">
@@ -80,7 +80,7 @@ export default function KonsultacijasPage() {
             </section>
 
             {/* How it works */}
-            <section className="section-padding bg-white">
+            <section className="py-16 bg-white">
                 <div className="container-custom">
                     <h2 className="text-4xl font-display font-bold text-center mb-12">
                         Kā tas <span className="text-gradient">notiek?</span>
@@ -112,7 +112,7 @@ export default function KonsultacijasPage() {
             </section>
 
             {/* Packages */}
-            <section id="paketes" className="section-padding bg-gray-50">
+            <section id="paketes" className="py-20 bg-gray-50">
                 <div className="container-custom">
                     <h2 className="text-4xl font-display font-bold text-center mb-12">
                         Izvēlies <span className="text-gradient">Sev Piemēroto</span>
@@ -121,7 +121,7 @@ export default function KonsultacijasPage() {
                         {services.map((service, index) => (
                             <Card
                                 key={index}
-                                className={`relative ${service.popular ? 'ring-2 ring-primary-500' : ''}`}
+                                className={`relative ${service.popular ? 'ring-2 ring-primary-500 pt-6 !overflow-visible' : ''}`}
                             >
                                 {service.popular && (
                                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -161,9 +161,9 @@ export default function KonsultacijasPage() {
             </section>
 
             {/* CTA */}
-            <section className="section-padding bg-gradient-to-r from-primary-500 to-secondary-500 text-white">
+            <section className="py-16 bg-gradient-to-r from-primary-500 to-secondary-500 text-white">
                 <div className="container-custom text-center">
-                    <h2 className="text-4xl font-display font-bold mb-4">
+                    <h2 className="text-4xl font-display font-bold mb-4 text-white">
                         Gatavs sākt?
                     </h2>
                     <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">

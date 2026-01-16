@@ -44,8 +44,12 @@ export default function LoginPage() {
             <div className="max-w-md w-full">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
-                        <span className="text-3xl font-bold text-gradient">IM</span>
+                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl overflow-hidden p-2">
+                        <img
+                            src="/images/IM-sirds mazs 2.png"
+                            alt="Izaugt Mīlestībā"
+                            className="w-full h-auto"
+                        />
                     </div>
                     <h1 className="text-3xl font-display font-bold text-white mb-2">
                         Admin Panelis

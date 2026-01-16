@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
+import SiteText from '@/components/SiteText'
 import { ClockIcon, TagIcon } from '@heroicons/react/24/outline'
 
 const categories = [
@@ -66,11 +67,14 @@ export default function ArticlesPreview() {
             <div className="container-custom">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                        <span className="text-gradient">Lasi</span> un Mācies
+                        <SiteText textKey="articles.title" fallback="Lasi un Mācies" as="span" className="text-gradient" />
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Raksti un padomi dažādām vecāku ceļa situācijām
-                    </p>
+                    <SiteText
+                        textKey="articles.subtitle"
+                        fallback="Raksti un padomi dažādām vecāku ceļa situācijām"
+                        as="p"
+                        className="text-xl text-gray-600 max-w-2xl mx-auto"
+                    />
                 </div>
 
                 {/* Category tabs */}
@@ -80,8 +84,8 @@ export default function ArticlesPreview() {
                             key={category.id}
                             onClick={() => setActiveCategory(category.id)}
                             className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${activeCategory === category.id
-                                    ? 'bg-primary-500 text-white shadow-lg'
-                                    : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+                                ? 'bg-primary-500 text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600'
                                 }`}
                         >
                             {category.name}

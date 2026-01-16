@@ -11,6 +11,7 @@ import {
     ChartBarIcon,
     ArrowRightOnRectangleIcon,
     PlusIcon,
+    LanguageIcon,
 } from '@heroicons/react/24/outline'
 
 const stats = [
@@ -23,7 +24,8 @@ const stats = [
 const quickActions = [
     { name: 'Pievienot rakstu', href: '/labot/raksti/jauns', icon: PlusIcon, color: 'bg-primary-500' },
     { name: 'Skatīt rakstus', href: '/labot/raksti', icon: DocumentTextIcon, color: 'bg-secondary-500' },
-    { name: 'Bulk upload', href: '/labot/raksti/bulk', icon: DocumentTextIcon, color: 'bg-warm-500' },
+    { name: 'Vizuālais redaktors', href: '/labot/teksti/vizualais', icon: LanguageIcon, color: 'bg-purple-500' },
+    { name: 'Vietnes teksti', href: '/labot/teksti', icon: LanguageIcon, color: 'bg-indigo-500' },
     { name: 'Pasūtījumi', href: '/labot/pasutijumi', icon: ShoppingBagIcon, color: 'bg-green-500' },
 ]
 
@@ -95,7 +97,7 @@ export default function DashboardPage() {
                 {/* Quick Actions */}
                 <div className="mb-8">
                     <h2 className="text-2xl font-display font-bold mb-4">Ātrās Darbības</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                         {quickActions.map((action) => (
                             <Link key={action.name} href={action.href}>
                                 <Card className="text-center hover:scale-105 transition-transform cursor-pointer">
@@ -147,6 +149,12 @@ export default function DashboardPage() {
                                 <div className="flex items-center justify-between">
                                     <span className="font-semibold">Pasūtījumi</span>
                                     <ShoppingBagIcon className="h-5 w-5 text-gray-400" />
+                                </div>
+                            </Link>
+                            <Link href="/labot/teksti" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                <div className="flex items-center justify-between">
+                                    <span className="font-semibold">Vietnes teksti</span>
+                                    <LanguageIcon className="h-5 w-5 text-gray-400" />
                                 </div>
                             </Link>
                             <Link href="/labot/lietotaji" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">

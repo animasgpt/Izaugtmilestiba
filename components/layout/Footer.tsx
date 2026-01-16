@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import SiteText from '@/components/SiteText'
 
 const footerLinks = {
     pakalpojumi: [
@@ -33,9 +34,12 @@ export default function Footer() {
                                 className="h-12 w-auto"
                             />
                         </div>
-                        <p className="text-sm text-gray-600">
-                            Atbalsts vecākiem ceļā uz mīlošu un saprotoš u ģimeni.
-                        </p>
+                        <SiteText
+                            textKey="footer.tagline"
+                            fallback="Atbalsts vecākiem celiņā uz mīlošu un saprotošu ģimeni."
+                            as="p"
+                            className="text-sm text-gray-600"
+                        />
                         <div className="flex space-x-4">
                             <a
                                 href="mailto:info@izaugtmilestiba.lv"
@@ -104,9 +108,12 @@ export default function Footer() {
 
                 <div className="mt-12 pt-8 border-t border-gray-200">
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <p className="text-sm text-gray-600">
-                            © {new Date().getFullYear()} Izaugt Mīlestībā. Visas tiesības aizsargātas.
-                        </p>
+                        <SiteText
+                            textKey="footer.copyright"
+                            fallback={`© ${new Date().getFullYear()} Izaugt Mīlestībā. Visas tiesības aizsargātas.`}
+                            as="p"
+                            className="text-sm text-gray-600"
+                        />
                         <div className="flex space-x-6">
                             <Link href="/privatuma-politika" className="text-sm text-gray-600 hover:text-primary-600">
                                 Privātuma politika

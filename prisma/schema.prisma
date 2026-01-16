@@ -115,3 +115,17 @@ model ChatConversation {
 
   @@index([sessionId])
 }
+
+// Vietnes teksti (editējami no admin paneļa)
+model SiteText {
+  id          String   @id @default(cuid())
+  key         String   @unique // Unikāls identifikators (piemēram, "home.hero.title")
+  value       String   @db.Text // Teksta vērtība
+  description String?  // Apraksts, kur šis teksts tiek izmantots
+  section     String   // Sadaļa (home, about, services, utt.)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([section])
+  @@index([key])
+}

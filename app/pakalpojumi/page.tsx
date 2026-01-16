@@ -76,7 +76,7 @@ export default function PakalpojumiPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50">
             {/* Header */}
-            <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-16">
+            <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-8">
                 <div className="container-custom">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
                         Mūsu Pakalpojumi
@@ -87,7 +87,7 @@ export default function PakalpojumiPage() {
                 </div>
             </div>
 
-            <div className="container-custom py-12">
+            <div className="container-custom py-6">
                 {/* Category Filter */}
                 <div className="flex flex-wrap justify-center gap-3 mb-12">
                     {categories.map((category) => (
@@ -95,8 +95,8 @@ export default function PakalpojumiPage() {
                             key={category}
                             onClick={() => setSelectedCategory(category)}
                             className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 ${selectedCategory === category
-                                    ? 'bg-primary-500 text-white shadow-lg scale-105'
-                                    : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600 shadow-md'
+                                ? 'bg-primary-500 text-white shadow-lg scale-105'
+                                : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600 shadow-md'
                                 }`}
                         >
                             {category}

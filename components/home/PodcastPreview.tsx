@@ -1,5 +1,6 @@
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
+import SiteText from '@/components/SiteText'
 import { PlayIcon, MusicalNoteIcon } from '@heroicons/react/24/solid'
 
 const latestPodcast = {
@@ -61,11 +62,14 @@ export default function PodcastPreview() {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                                <span className="text-gradient">Klausies</span> Podkāstus
+                                <SiteText textKey="podcast.title" fallback="Klausies un Iedvesmojies" as="span" className="text-gradient" />
                             </h2>
-                            <p className="text-xl text-gray-600">
-                                Dziļākas sarunas par vecāku ceļu, bērnu attīstību un ģimenes dinamiku. Klausies ceļā, mājas darbos vai atpūtas brīžos.
-                            </p>
+                            <SiteText
+                                textKey="podcast.subtitle"
+                                fallback="Podkāsti par vecāku ceļu un bērnu audzināšanu"
+                                as="p"
+                                className="text-xl text-gray-600"
+                            />
                         </div>
 
                         <div className="space-y-4">
