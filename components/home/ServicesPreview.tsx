@@ -7,30 +7,30 @@ import { ChatBubbleLeftRightIcon, BookOpenIcon, AcademicCapIcon } from '@heroico
 const services = [
     {
         id: 1,
-        title: 'Konsultācijas',
-        description: 'Individuālas konsultācijas ar PEP mammas metodoloģiju. Atbalsts konkrētām situācijām un izaicinājumiem.',
+        title: 'Konsultācija klātienē',
+        description: 'Individuāla saruna mājīgā vidē, veltot pilnu uzmanību Tev un Tavām sajūtām.',
         icon: ChatBubbleLeftRightIcon,
         image: '/images/demo/consultation.png',
-        price: 'No 45€',
-        href: '/pakalpojumi/konsultacijas',
+        price: '50€',
+        href: '/pakalpojumi/konsultacijas-klatiene',
     },
     {
         id: 2,
-        title: 'Grāmata',
-        description: 'Rokasgrāmata mīlošai audzināšanai. Praktiskas metodes un padomiem katrai dienai.',
-        icon: BookOpenIcon,
-        image: '/images/demo/book.png',
-        price: '24.99€',
-        href: '/pakalpojumi/gramata',
+        title: 'Konsultācija online',
+        description: 'Ērts un pieejams atbalsts no jebkuras vietas, kur jūties vislabāk.',
+        icon: ChatBubbleLeftRightIcon,
+        image: '/images/demo/online-consultation.png',
+        price: '35€',
+        href: '/pakalpojumi/konsultacijas-online',
     },
     {
         id: 3,
-        title: 'Izaicinājumu programma',
-        description: '30 dienu izaicinājums vecākiem. Praktiski uzdevumi un atbalsts katru dienu. Izmēģini jau tagad!',
-        icon: AcademicCapIcon,
-        image: '/images/demo/challenge.png',
-        price: '39€',
-        href: '/pakalpojumi/izaicinajums',
+        title: 'Grāmata',
+        description: '“Mammas sajūtu dienasgrāmata” – Tavs ceļvedis un atbalsts ikdienas gaitās.',
+        icon: BookOpenIcon,
+        image: '/images/demo/book.png',
+        price: '19.99€',
+        href: '/pakalpojumi/gramata',
     },
 ]
 
@@ -39,15 +39,9 @@ export default function ServicesPreview() {
         <section className="pt-8 pb-16 md:pt-12 md:pb-24 bg-light">
             <div className="container-custom">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-primary-500">
-                        Mūsu <SiteText textKey="services.title" fallback="Pakalpojumi" as="span" className="text-accent-500" />
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 text-primary-500">
+                        Tavam <span className="text-accent-500">atbalstam</span>
                     </h2>
-                    <SiteText
-                        textKey="services.subtitle"
-                        fallback="Izvēlies sev piemērotāko atbalsta veidu"
-                        as="p"
-                        className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
-                    />
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -86,12 +80,6 @@ export default function ServicesPreview() {
                             </Button>
                         </div>
                     ))}
-                </div>
-
-                <div className="text-center mt-12">
-                    <Button href="/pakalpojumi" variant="primary" size="lg">
-                        Skatīt visus pakalpojumus
-                    </Button>
                 </div>
             </div>
         </section>

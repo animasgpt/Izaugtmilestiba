@@ -12,59 +12,39 @@ export default function HeroSection() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
                     <div className="space-y-6 animate-fade-in">
-                        <div className="inline-flex items-center space-x-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold">
-                            <SparklesIcon className="h-5 w-5" />
-                            <span>Tavs atbalsts vecāku ceļā</span>
-                        </div>
+
 
                         <SiteText
                             textKey="home.hero.title"
-                            fallback="Izaugt Mīlestībā"
+                            fallback="Izaugt mīlestībā"
                             as="h1"
                             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-primary-500"
                         />
 
-                        <SiteText
-                            textKey="home.hero.subtitle"
-                            fallback="Atbalsts vecākiem ceļā uz mīlošu un saprotošu ģimeni!"
-                            as="p"
-                            className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl"
-                        />
-
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <Button href="/runa" variant="primary" size="lg">
-                                Izmēģini AI PEP Mammu
-                            </Button>
-                            <Button href="/pakalpojumi" variant="secondary" size="lg">
-                                Apskatīt pakalpojumus
-                            </Button>
-                        </div>
-
-                        <div className="flex items-center gap-8 pt-6">
-                            <div>
-                                <div className="text-2xl md:text-3xl font-bold text-primary-500">500+</div>
-                                <div className="text-sm text-gray-600">Apmierināti vecāki</div>
-                            </div>
-                            <div>
-                                <div className="text-2xl md:text-3xl font-bold text-primary-500">100+</div>
-                                <div className="text-sm text-gray-600">Raksti un resursi</div>
-                            </div>
-                            <div>
-                                <div className="text-2xl md:text-3xl font-bold text-primary-500">24/7</div>
-                                <div className="text-sm text-gray-600">AI atbalsts</div>
+                        <div className="space-y-4 max-w-xl">
+                            <p className="text-xl md:text-2xl font-bold text-primary-500 leading-snug">
+                                “Bērniem nav vajadzīgi perfekti vecāki.<br />
+                                Bērniem ir vajadzīgi mīloši vecāki.”
+                            </p>
+                            <div className="text-primary-500/80 space-y-0.5">
+                                <p className="text-base">Sertificēta PEP mamma,</p>
+                                <p className="text-base">“Mammas sajūtu dienasgrāmata” autore</p>
+                                <p className="font-semibold text-primary-500">Madara Pauzere</p>
                             </div>
                         </div>
+
+
                     </div>
 
                     {/* Image */}
                     <div className="relative animate-slide-up animation-delay-200">
                         <div className="relative rounded-3xl overflow-hidden shadow-medium">
                             <Image
-                                src="/images/demo/hero.png"
-                                alt="Māte un bērns kopā"
-                                width={600}
-                                height={600}
-                                className="w-full h-auto"
+                                src="/personal/madara11.jpeg"
+                                alt="Izaugt mīlestībā"
+                                width={800}
+                                height={800}
+                                className="w-full h-auto object-cover aspect-[4/3] rounded-3xl"
                                 priority
                             />
                         </div>
@@ -73,7 +53,7 @@ export default function HeroSection() {
                         <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4 animate-scale-in animation-delay-400">
                             <div className="flex items-center space-x-2">
                                 <div className="w-3 h-3 bg-secondary-500 rounded-full animate-pulse"></div>
-                                <span className="text-sm font-medium text-gray-700">AI Chatbot aktīvs</span>
+                                <span className="text-sm font-medium text-gray-700">Ai chatbot aktīvs</span>
                             </div>
                         </div>
 

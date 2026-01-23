@@ -62,7 +62,7 @@ export default function PodcastPreview() {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                                <SiteText textKey="podcast.title" fallback="Klausies un Iedvesmojies" as="span" className="text-gradient" />
+                                <SiteText textKey="podcast.title" fallback="Klausies un iedvesmojies" as="span" className="text-gradient" />
                             </h2>
                             <SiteText
                                 textKey="podcast.subtitle"

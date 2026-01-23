@@ -18,12 +18,12 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-    title: 'Izaugt Mīlestībā - Atbalsts vecākiem',
-    description: 'Resursu centrs vecākiem, e-veikals un digitālā atbalsta platforma. Konsultācijas, raksti, podkāsti un AI chatbot atbalsts.',
-    keywords: 'vecāki, bērni, audzināšana, konsultācijas, PEP mamma, Latvija',
-    authors: [{ name: 'Izaugt Mīlestībā' }],
+    title: 'Izaugt mīlestībā - atbalsts vecākiem',
+    description: 'Resursu centrs vecākiem, e-veikals un digitālā atbalsta platforma. Konsultācijas, raksti, podkāsti un ai chatbot atbalsts.',
+    keywords: 'vecāki, bērni, audzināšana, konsultācijas, pep mamma, Latvija',
+    authors: [{ name: 'Izaugt mīlestībā' }],
     openGraph: {
-        title: 'Izaugt Mīlestībā',
+        title: 'Izaugt mīlestībā',
         description: 'Atbalsts vecākiem - konsultācijas, raksti, podkāsti',
         type: 'website',
         locale: 'lv_LV',

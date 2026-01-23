@@ -39,25 +39,32 @@ export async function getArticleById(id: string) {
 }
 
 export async function createArticle(data: any) {
-    const slug = data.title
-        .toLowerCase()
-        .replace(/ /g, '-')
-        .replace(/[^\w-]+/g, '')
+    try {
+        const generatedSlug = data.title
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // Noņem diakritiskās zīmes (ā -> a)
+            .replace(/[^a-z0-9]+/g, '-')     // Nomaina visu, kas nav burts vai cipars, pret svītriņu
+            .replace(/^-+|-+$/g, '');        // Noņem svītriņas sākumā un beigās
 
-    return await prisma.article.create({
-        data: {
-            title: data.title,
-            slug: data.slug || slug || `article-${Date.now()}`,
-            excerpt: data.excerpt,
-            content: data.content,
-            category: data.category,
-            categoryName: data.categoryName,
-            readTime: data.readTime,
-            author: data.author || 'Laura Bērziņa',
-            date: data.date ? new Date(data.date) : new Date(),
-            published: data.published ?? false,
-        }
-    })
+        return await prisma.article.create({
+            data: {
+                title: data.title,
+                slug: data.slug || generatedSlug || `article-${Date.now()}`,
+                excerpt: data.excerpt,
+                content: data.content,
+                category: data.category,
+                categoryName: data.categoryName,
+                readTime: data.readTime,
+                author: data.author || 'Laura Bērziņa',
+                date: data.date ? new Date(data.date) : new Date(),
+                published: data.published ?? false,
+            }
+        })
+    } catch (error) {
+        console.error('Error in createArticle:', error);
+        throw error;
+    }
 }
 
 export async function updateArticle(id: string, data: any) {

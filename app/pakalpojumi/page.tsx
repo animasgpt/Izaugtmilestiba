@@ -79,11 +79,8 @@ export default function PakalpojumiPage() {
             <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-8">
                 <div className="container-custom">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
-                        Mūsu Pakalpojumi
+                        Tavam atbalstam
                     </h1>
-                    <p className="text-xl md:text-2xl opacity-90 max-w-3xl">
-                        Izvēlies sev piemērotāko atbalsta veidu savā vecāku ceļā
-                    </p>
                 </div>
             </div>
 

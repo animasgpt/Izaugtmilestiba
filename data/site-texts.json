@@ -2,10 +2,10 @@
   {
     "id": "1",
     "key": "home.hero.title",
-    "value": "Izaugt Mīlestībā Test",
+    "value": "Izaugt mīlestībā",
     "section": "home",
     "createdAt": "2026-01-16T04:00:00.000Z",
-    "updatedAt": "2026-01-16T17:43:33.910Z"
+    "updatedAt": "2026-01-23T18:18:00.000Z"
   },
   {
     "id": "2",
@@ -36,7 +36,7 @@
   {
     "id": "5",
     "key": "about.intro",
-    "value": "Sveiki! Es esmu Laura Bērziņa, bērnu psiholoģe un vecāku konsultante.",
+    "value": "Sveiki! es esmu laura bērziņa, bērnu psiholoģe un vecāku konsultante.",
     "description": "Par mani lapas ievads",
     "section": "about",
     "createdAt": "2026-01-16T04:00:00.000Z",
@@ -45,7 +45,7 @@
   {
     "id": "6",
     "key": "services.title",
-    "value": "Pakalpojumi",
+    "value": "pakalpojumi",
     "description": "Pakalpojumu lapas virsraksts",
     "section": "services",
     "createdAt": "2026-01-16T04:00:00.000Z",
@@ -108,7 +108,7 @@
   {
     "id": "13",
     "key": "footer.copyright",
-    "value": "© 2026 Izaugt Mīlestībā. Visas tiesības aizsargātas ANIMAS, SIA",
+    "value": "© 2026 Izaugt mīlestībā. Visas tiesības aizsargātas animas, sia",
     "description": "Kājenes autortiesību teksts",
     "section": "other",
     "createdAt": "2026-01-16T04:00:00.000Z",
@@ -180,7 +180,7 @@
   {
     "id": "21",
     "key": "articles.title",
-    "value": "Lasi un Mācies",
+    "value": "Lasi un mācies",
     "description": "Rakstu sekcijas virsraksts",
     "section": "articles",
     "createdAt": "2026-01-16T04:00:00.000Z",
@@ -198,7 +198,7 @@
   {
     "id": "23",
     "key": "podcast.title",
-    "value": "Klausies un Iedvesmojies",
+    "value": "Klausies un iedvesmojies",
     "description": "Podkāstu sekcijas virsraksts",
     "section": "podcast",
     "createdAt": "2026-01-16T04:00:00.000Z",

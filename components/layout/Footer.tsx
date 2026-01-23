@@ -11,7 +11,7 @@ const footerLinks = {
     saturs: [
         { name: 'Raksti', href: '/lasi' },
         { name: 'Podkāsti', href: '/klausies' },
-        { name: 'AI Chatbot', href: '/runa' },
+        { name: 'Ai chatbot', href: '/runa' },
     ],
     informacija: [
         { name: 'Iepazīsimies', href: '/iepazisimies' },
@@ -30,7 +30,7 @@ export default function Footer() {
                         <div className="flex items-center">
                             <img
                                 src="/images/IM-sirds pirms.png"
-                                alt="Izaugt Mīlestībā"
+                                alt="Izaugt mīlestībā"
                                 className="h-12 w-auto"
                             />
                         </div>

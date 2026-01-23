@@ -23,7 +23,11 @@ export async function POST(request: NextRequest) {
         // Single article
         const article = await createArticle(data)
         return NextResponse.json({ success: true, article })
-    } catch (error) {
-        return NextResponse.json({ error: 'Failed to create article' }, { status: 500 })
+    } catch (error: any) {
+        console.error('Failed to create article:', error);
+        return NextResponse.json({
+            error: 'Failed to create article',
+            details: error.message || 'Unknown error'
+        }, { status: 500 })
     }
 }

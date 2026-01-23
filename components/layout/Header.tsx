@@ -8,7 +8,7 @@ import { useCart } from '@/lib/cart/cartContext'
 
 const navigation = [
     {
-        name: 'PAKALPOJUMI',
+        name: 'Pakalpojumi',
         href: '/pakalpojumi',
         dropdown: [
             { name: 'Konsultācijas', href: '/pakalpojumi/konsultacijas' },
@@ -17,7 +17,7 @@ const navigation = [
         ],
     },
     {
-        name: 'LASI',
+        name: 'Lasi',
         href: '/lasi',
         dropdown: [
             { name: 'Visi raksti', href: '/lasi' },
@@ -29,15 +29,15 @@ const navigation = [
         ],
     },
     {
-        name: 'KLAUSIES',
+        name: 'Klausies',
         href: '/klausies',
     },
     {
-        name: 'RUNĀ',
+        name: 'Runā',
         href: '/runa',
     },
     {
-        name: 'PAPILDUS',
+        name: 'Papildus',
         href: '#',
         dropdown: [
             { name: 'Iepazīsimies', href: '/iepazisimies' },
@@ -75,7 +75,7 @@ export default function Header() {
                     <Link href="/" className="flex items-center group">
                         <img
                             src="/images/IM-sirds pirms.png"
-                            alt="Izaugt Mīlestībā"
+                            alt="Izaugt mīlestībā"
                             className="h-12 w-auto transform group-hover:scale-105 transition-transform"
                         />
                     </Link>

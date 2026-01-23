@@ -67,7 +67,7 @@ export default function ArticlesPreview() {
             <div className="container-custom">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                        <SiteText textKey="articles.title" fallback="Lasi un Mācies" as="span" className="text-gradient" />
+                        <SiteText textKey="articles.title" fallback="Lasi un mācies" as="span" className="text-gradient" />
                     </h2>
                     <SiteText
                         textKey="articles.subtitle"
