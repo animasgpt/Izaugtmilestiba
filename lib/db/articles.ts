@@ -10,12 +10,14 @@ export interface Article {
     categoryName: string;
     readTime: string | null;
     author: string;
+    image: string | null;
     date: Date | string;
     published: boolean;
 }
 
-export async function getAllArticles() {
+export async function getAllArticles(publishedOnly = false) {
     return await prisma.article.findMany({
+        where: publishedOnly ? { published: true } : {},
         orderBy: {
             date: 'desc'
         }
@@ -56,7 +58,8 @@ export async function createArticle(data: any) {
                 category: data.category,
                 categoryName: data.categoryName,
                 readTime: data.readTime,
-                author: data.author || 'Laura Bērziņa',
+                author: data.author || 'Madara Pauzere',
+                image: data.image,
                 date: data.date ? new Date(data.date) : new Date(),
                 published: data.published ?? false,
             }
@@ -68,20 +71,23 @@ export async function createArticle(data: any) {
 }
 
 export async function updateArticle(id: string, data: any) {
+    const updateData: any = {};
+
+    if (data.title !== undefined) updateData.title = data.title;
+    if (data.slug !== undefined) updateData.slug = data.slug;
+    if (data.excerpt !== undefined) updateData.excerpt = data.excerpt;
+    if (data.content !== undefined) updateData.content = data.content;
+    if (data.category !== undefined) updateData.category = data.category;
+    if (data.categoryName !== undefined) updateData.categoryName = data.categoryName;
+    if (data.readTime !== undefined) updateData.readTime = data.readTime;
+    if (data.author !== undefined) updateData.author = data.author;
+    if (data.image !== undefined) updateData.image = data.image;
+    if (data.date !== undefined) updateData.date = new Date(data.date);
+    if (data.published !== undefined) updateData.published = data.published;
+
     return await prisma.article.update({
         where: { id },
-        data: {
-            title: data.title,
-            slug: data.slug,
-            excerpt: data.excerpt,
-            content: data.content,
-            category: data.category,
-            categoryName: data.categoryName,
-            readTime: data.readTime,
-            author: data.author,
-            date: data.date ? new Date(data.date) : undefined,
-            published: data.published,
-        }
+        data: updateData
     })
 }
 

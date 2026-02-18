@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
-import { PencilIcon, TrashIcon, PlusIcon, EyeIcon } from '@heroicons/react/24/outline'
+import { PencilIcon, TrashIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 
 export default function RakstiPage() {
     const [articles, setArticles] = useState<any[]>([])
@@ -27,12 +27,38 @@ export default function RakstiPage() {
         }
     }
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Vai tiešām vēlies dzēst šo rakstu?')) return
+    const handleToggleVisibility = async (article: any) => {
+        try {
+            const response = await fetch(`/api/articles/${article.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ published: !article.published }),
+            })
+
+            if (response.ok) {
+                // Update local state for immediate feedback
+                setArticles(articles.map(a =>
+                    a.id === article.id ? { ...a, published: !article.published } : a
+                ))
+            } else {
+                alert('Neizdevās mainīt redzamību')
+            }
+        } catch (error) {
+            console.error('Failed to toggle visibility:', error)
+            alert('Neizdevās mainīt redzamību')
+        }
+    }
+
+    const handleDelete = async (id: string, title: string) => {
+        if (!confirm(`UZMANĪBU! Vai tiešām vēlies NEATGRIEZENISKI DZĒST rakstu: "${title}"? Šī darbība nav atsaucama.`)) return
 
         try {
-            await fetch(`/api/articles/${id}`, { method: 'DELETE' })
-            fetchArticles()
+            const response = await fetch(`/api/articles/${id}`, { method: 'DELETE' })
+            if (response.ok) {
+                fetchArticles()
+            } else {
+                alert('Neizdevās izdzēst rakstu')
+            }
         } catch (error) {
             alert('Neizdevās izdzēst rakstu')
         }
@@ -73,8 +99,8 @@ export default function RakstiPage() {
                             key={cat}
                             onClick={() => setFilter(cat)}
                             className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === cat
-                                    ? 'bg-primary-500 text-white'
-                                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                                ? 'bg-primary-500 text-white'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
                                 }`}
                         >
                             {cat === 'all' ? 'Visi' : cat}
@@ -119,27 +145,32 @@ export default function RakstiPage() {
                                             <td className="p-4 text-gray-600">{article.date}</td>
                                             <td className="p-4">
                                                 <span className={`px-2 py-1 rounded text-sm ${article.published
-                                                        ? 'bg-green-100 text-green-700'
-                                                        : 'bg-gray-100 text-gray-700'
+                                                    ? 'bg-green-100 text-green-700'
+                                                    : 'bg-gray-100 text-gray-700'
                                                     }`}>
                                                     {article.published ? 'Publicēts' : 'Melnraksts'}
                                                 </span>
                                             </td>
                                             <td className="p-4">
                                                 <div className="flex items-center justify-end space-x-2">
-                                                    <Link href={`/lasi/${article.id}`} target="_blank">
-                                                        <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                                                            <EyeIcon className="h-5 w-5" />
-                                                        </button>
-                                                    </Link>
+                                                    <button
+                                                        onClick={() => handleToggleVisibility(article)}
+                                                        className={`p-2 rounded-lg transition-colors ${article.published
+                                                            ? 'text-green-600 hover:bg-green-50'
+                                                            : 'text-gray-400 hover:bg-gray-100'}`}
+                                                        title={article.published ? 'Paslēpt no vietnes' : 'Publicēt vietnē'}
+                                                    >
+                                                        {article.published ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
+                                                    </button>
                                                     <Link href={`/labot/raksti/${article.id}`}>
-                                                        <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                                                        <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title="Labot rakstu">
                                                             <PencilIcon className="h-5 w-5" />
                                                         </button>
                                                     </Link>
                                                     <button
-                                                        onClick={() => handleDelete(article.id)}
+                                                        onClick={() => handleDelete(article.id, article.title)}
                                                         className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                                                        title="Dzēst rakstu"
                                                     >
                                                         <TrashIcon className="h-5 w-5" />
                                                     </button>

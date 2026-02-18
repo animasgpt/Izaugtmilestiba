@@ -12,6 +12,7 @@ interface Article {
     categoryName: string;
     readTime: string;
     author: string;
+    image: string;
     date: string;
     published: boolean;
 }
@@ -35,6 +36,7 @@ export default function NewArticlePage() {
         categoryName: 'Raksti',
         readTime: '5 min',
         author: 'Madara Pauzere',
+        image: '',
         date: new Date().toISOString().split('T')[0],
         published: true,
     });
@@ -110,6 +112,21 @@ export default function NewArticlePage() {
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 required
                                 placeholder="Raksta nosaukums"
+                            />
+                        </div>
+
+                        {/* Image */}
+                        <div className="mb-6">
+                            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
+                                Bildes URL
+                            </label>
+                            <input
+                                type="text"
+                                id="image"
+                                value={article.image}
+                                onChange={(e) => setArticle({ ...article, image: e.target.value })}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                placeholder="/images/raksti/image.png"
                             />
                         </div>
 

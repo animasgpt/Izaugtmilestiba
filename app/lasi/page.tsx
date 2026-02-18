@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import TestimonialsGallery from '@/components/home/TestimonialsGallery'
 import { ClockIcon, TagIcon, FunnelIcon, SpeakerWaveIcon, StopIcon } from '@heroicons/react/24/outline'
 
 export const dynamic = 'force-dynamic'
@@ -93,7 +94,7 @@ function LasiPageContent() {
     useEffect(() => {
         const fetchArticles = async () => {
             try {
-                const response = await fetch('/api/articles')
+                const response = await fetch('/api/articles?published=true')
                 const data = await response.json()
                 setArticles(data.articles || [])
             } catch (error) {
@@ -188,7 +189,7 @@ function LasiPageContent() {
                             <Card className="h-full group">
                                 <div className="relative h-48 mb-4 rounded-xl overflow-hidden bg-gray-200">
                                     <img
-                                        src={article.image}
+                                        src={article.image || '/images/demo/hero.png'}
                                         alt={article.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
@@ -242,6 +243,11 @@ function LasiPageContent() {
                         <p className="text-xl text-gray-600">Nav atrasti raksti šajā kategorijā.</p>
                     </div>
                 )}
+            </div>
+
+            {/* Testimonials section */}
+            <div className="border-t border-gray-100">
+                <TestimonialsGallery />
             </div>
         </div>
     )

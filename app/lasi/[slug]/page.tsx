@@ -8,7 +8,8 @@ import { getArticleById } from '@/lib/db/articles'
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
     const article = await getArticleById(params.slug)
 
-    if (!article) {
+    // Check if article exists and is published
+    if (!article || !article.published) {
         notFound()
     }
 
@@ -25,7 +26,17 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     return (
         <div className="min-h-screen bg-white">
             {/* Hero */}
-            <div className="relative h-96 bg-gradient-to-br from-primary-500 to-secondary-500">
+            <div className={`relative h-96 ${article.image ? '' : 'bg-gradient-to-br from-primary-500 to-secondary-500'}`}>
+                {article.image && (
+                    <div className="absolute inset-0">
+                        <img
+                            src={article.image}
+                            alt={article.title}
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/40"></div>
+                    </div>
+                )}
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="container-custom h-full flex items-center relative z-10">
                     <div className="max-w-3xl text-white">
@@ -38,7 +49,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                                 <span>{article.readTime}</span>
                             </div>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                        <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">
                             {article.title}
                         </h1>
                         <div className="flex items-center space-x-6 text-sm">

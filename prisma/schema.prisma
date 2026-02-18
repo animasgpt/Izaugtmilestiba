@@ -31,7 +31,8 @@ model Article {
   category     String   // gaidibas, dzives-gads, 2-3-gadi, bernudarzs, sarunas, raksti
   categoryName String
   readTime     String?
-  author       String   @default("Laura Bērziņa")
+  author       String   @default("Madara Pauzere")
+  image        String?
   date         DateTime @default(now())
   published    Boolean  @default(true)
   createdAt    DateTime @default(now())

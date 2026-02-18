@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
-import SiteText from '@/components/SiteText'
-import { ChatBubbleLeftRightIcon, BookOpenIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
+import { ChatBubbleLeftRightIcon, BookOpenIcon } from '@heroicons/react/24/outline'
 
 const services = [
     {

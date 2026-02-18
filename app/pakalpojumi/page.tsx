@@ -5,66 +5,66 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
-import { ShoppingCartIcon, ChatBubbleLeftRightIcon, BookOpenIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
+import { ShoppingCartIcon, ChatBubbleLeftRightIcon, BookOpenIcon } from '@heroicons/react/24/outline'
 
 const products = [
     {
         id: 1,
-        title: 'Konsultācijas',
-        description: 'Individuālas konsultācijas ar PEP mammas metodoloģiju. Atbalsts konkrētām situācijām un izaicinājumiem.',
-        longDescription: 'Personalizēts atbalsts tavai ģimenei. Konsultācijas notiek online vai klātienē, pēc tavas izvēles.',
+        title: 'Konsultācija klātienē',
+        description: 'Individuāla saruna mājīgā vidē, veltot pilnu uzmanību Tev un Tavām sajūtām.',
+        longDescription: 'Personalizēts atbalsts tavai ģimenei klātienē. Konsultācija notiek mājīgā atmosfērā, sniedzot iespēju padziļināti pārrunāt Tev svarīgos jautājumus.',
         icon: ChatBubbleLeftRightIcon,
         image: '/images/demo/consultation.png',
-        price: 45,
-        priceText: 'No 45€',
-        href: '/pakalpojumi/konsultacijas',
+        price: 50,
+        priceText: '50€',
+        href: '/pakalpojumi/konsultacijas-klatiene',
         category: 'Pakalpojumi',
         features: [
-            '60 minūšu individuāla konsultācija',
-            'Personalizēti risinājumi',
-            'Online vai klātienē',
-            'Sekojošs atbalsts e-pastā'
+            '60 minūšu individuāla saruna',
+            'Empātiska un saprotoša vide',
+            'PEP mammas metodoloģija',
+            'Sekojošs atbalsts nepieciešamības gadījumā'
         ]
     },
     {
         id: 2,
-        title: 'Grāmata "Izaugt Mīlestībā"',
-        description: 'Rokasgrāmata mīlošai audzināšanai. Praktiski padomi un metodes katrai dienai.',
-        longDescription: 'Visaptveroša rokasgrāmata vecākiem, kas vēlas audzināt bērnus ar mīlestību un sapratni.',
-        icon: BookOpenIcon,
-        image: '/images/demo/book.png',
-        price: 24.99,
-        priceText: '24.99€',
-        href: '/pakalpojumi/gramata',
-        category: 'Produkti',
+        title: 'Konsultācija online',
+        description: 'Ērts un pieejams atbalsts no jebkuras vietas, kur jūties vislabāk.',
+        longDescription: 'Saņem atbalstu neizejot no mājām. Videozvans sniedz to pašu tuvības sajūtu un profesionālo atbalstu, pielāgojoties Tavam ritmam.',
+        icon: ChatBubbleLeftRightIcon,
+        image: '/images/demo/online-consultation.png',
+        price: 35,
+        priceText: '35€',
+        href: '/pakalpojumi/konsultacijas-online',
+        category: 'Pakalpojumi',
         features: [
-            '250+ lappuses praktisko padomu',
-            'PEP mammas metodoloģija',
-            'Reāli piemēri no dzīves',
-            'Digitālā un fiziskā versija'
+            '60 minūšu video saruna',
+            'Pieejams no jebkuras vietas pasaulē',
+            'Nav jātērē laiks ceļā',
+            'Konfidentiāls un ērts risinājums'
         ]
     },
     {
         id: 3,
-        title: '30 Dienu Izaicinājums',
-        description: '30 dienu izaicinājums vecākiem. Praktiski uzdevumi un atbalsts katru dienu.  Izmēģini jau tagad!',
-        longDescription: 'Transformē savas vecāku prasmes 30 dienās ar ikdienas uzdevumiem un atbalstu.',
-        icon: AcademicCapIcon,
-        image: '/images/demo/challenge.png',
-        price: 39,
-        priceText: '39€',
-        href: '/pakalpojumi/izaicinajums',
-        category: 'Programmas',
+        title: 'Grāmata "Mammas sajūtu dienasgrāmata"',
+        description: 'Tavs ceļvedis un atbalsts ikdienas gaitās.',
+        longDescription: 'Praktiska un iedvesmojoša rokasgrāmata, kas palīdzēs Tev sajust un izprast savas emocijas vecāku ceļā.',
+        icon: BookOpenIcon,
+        image: '/images/demo/book.png',
+        price: 19.99,
+        priceText: '19.99€',
+        href: '/pakalpojumi/gramata',
+        category: 'Produkti',
         features: [
-            '30 dienu strukturēta programma',
-            'Ikdienas uzdevumi un refleksijas',
-            'Privāta Facebook grupa',
-            'Tiešsaistes atbalsts'
+            'Praktiski uzdevumi un refleksijas',
+            'Iedvesmas mirkļi katrai dienai',
+            'Mīļš un pārdomāts dizains',
+            'Vērtīgas atziņas un padomi'
         ]
     }
 ]
 
-const categories = ['Visi', 'Pakalpojumi', 'Produkti', 'Programmas']
+const categories = ['Visi', 'Pakalpojumi', 'Produkti']
 
 export default function PakalpojumiPage() {
     const [selectedCategory, setSelectedCategory] = useState('Visi')

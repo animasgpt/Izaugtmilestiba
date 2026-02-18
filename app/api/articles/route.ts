@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAllArticles, createArticle, bulkCreateArticles } from '@/lib/db/articles'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     try {
-        const articles = await getAllArticles()
+        const { searchParams } = new URL(request.url)
+        const publishedOnly = searchParams.get('published') === 'true'
+
+        const articles = await getAllArticles(publishedOnly)
         return NextResponse.json({ articles })
     } catch (error) {
         return NextResponse.json({ error: 'Failed to fetch articles' }, { status: 500 })

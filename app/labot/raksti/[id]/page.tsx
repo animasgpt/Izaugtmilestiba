@@ -13,6 +13,7 @@ interface Article {
     categoryName: string;
     readTime: string;
     author: string;
+    image: string;
     date: string;
     published: boolean;
 }
@@ -43,7 +44,7 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
             const response = await fetch(`/api/articles/${params.id}`);
             if (!response.ok) throw new Error('Raksts nav atrasts');
             const data = await response.json();
-            setArticle(data);
+            setArticle(data.article);
         } catch (err: any) {
             setError(err.message);
         } finally {
@@ -78,7 +79,8 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
     };
 
     const handleDelete = async () => {
-        if (!confirm('Vai tiešām vēlies dzēst šo rakstu?')) return;
+        if (!article) return;
+        if (!confirm(`UZMANĪBU! Vai tiešām vēlies NEATGRIEZENISKI DZĒST rakstu: "${article.title}"? Šī darbība nav atsaucama.`)) return;
 
         try {
             const response = await fetch(`/api/articles/${params.id}`, {
@@ -165,6 +167,21 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
                                 onChange={(e) => setArticle({ ...article, title: e.target.value })}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 required
+                            />
+                        </div>
+
+                        {/* Image */}
+                        <div className="mb-6">
+                            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
+                                Bildes URL
+                            </label>
+                            <input
+                                type="text"
+                                id="image"
+                                value={article.image || ''}
+                                onChange={(e) => setArticle({ ...article, image: e.target.value })}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                placeholder="/images/raksti/image.png"
                             />
                         </div>
 

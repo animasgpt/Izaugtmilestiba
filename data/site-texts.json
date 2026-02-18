@@ -212,5 +212,23 @@
     "section": "podcast",
     "createdAt": "2026-01-16T04:00:00.000Z",
     "updatedAt": "2026-01-16T04:00:00.000Z"
+  },
+  {
+    "id": "25",
+    "key": "testimonials.gallery.title",
+    "value": "Atsauksmes no mammām",
+    "description": "Atsauksmju galerijas virsraksts",
+    "section": "other",
+    "createdAt": "2026-02-18T18:00:00.000Z",
+    "updatedAt": "2026-02-18T18:00:00.000Z"
+  },
+  {
+    "id": "26",
+    "key": "testimonials.gallery.subtitle",
+    "value": "Mūsu kopienas pieredzes stāsti un sirsnīgi vārdi",
+    "description": "Atsauksmju galerijas apakšvirsraksts",
+    "section": "other",
+    "createdAt": "2026-02-18T18:00:00.000Z",
+    "updatedAt": "2026-02-18T18:00:00.000Z"
   }
 ]

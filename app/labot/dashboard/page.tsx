@@ -12,6 +12,8 @@ import {
     ArrowRightOnRectangleIcon,
     PlusIcon,
     LanguageIcon,
+    ChatBubbleLeftRightIcon,
+    EnvelopeIcon,
 } from '@heroicons/react/24/outline'
 
 const stats = [
@@ -24,7 +26,7 @@ const stats = [
 const quickActions = [
     { name: 'Pievienot rakstu', href: '/labot/raksti/jauns', icon: PlusIcon, color: 'bg-primary-500' },
     { name: 'Skatīt rakstus', href: '/labot/raksti', icon: DocumentTextIcon, color: 'bg-secondary-500' },
-    { name: 'Vizuālais redaktors', href: '/labot/teksti/vizualais', icon: LanguageIcon, color: 'bg-purple-500' },
+    { name: 'Atsauksmes', href: '/labot/atsauksmes', icon: ChatBubbleLeftRightIcon, color: 'bg-pink-500' },
     { name: 'Vietnes teksti', href: '/labot/teksti', icon: LanguageIcon, color: 'bg-indigo-500' },
     { name: 'Pasūtījumi', href: '/labot/pasutijumi', icon: ShoppingBagIcon, color: 'bg-green-500' },
 ]
@@ -155,6 +157,18 @@ export default function DashboardPage() {
                                 <div className="flex items-center justify-between">
                                     <span className="font-semibold">Vietnes teksti</span>
                                     <LanguageIcon className="h-5 w-5 text-gray-400" />
+                                </div>
+                            </Link>
+                            <Link href="/labot/atsauksmes" className="block p-3 bg-pink-50 rounded-lg hover:bg-pink-100 transition-colors">
+                                <div className="flex items-center justify-between">
+                                    <span className="font-semibold">Atsauksmes no mammām</span>
+                                    <ChatBubbleLeftRightIcon className="h-5 w-5 text-pink-400" />
+                                </div>
+                            </Link>
+                            <Link href="/labot/leads" className="block p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+                                <div className="flex items-center justify-between">
+                                    <span className="font-semibold">E-pasta saraksts</span>
+                                    <EnvelopeIcon className="h-5 w-5 text-green-500" />
                                 </div>
                             </Link>
                             <Link href="/labot/lietotaji" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
